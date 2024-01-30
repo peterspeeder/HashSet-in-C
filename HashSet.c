@@ -41,13 +41,25 @@ bool containsInHashSet(const HashSet* set, int element){
     return false;
 }
 
-int main(void){
+void count(HashSet* set) {
+    for (size_t i = 0; i < set->size; i++){
+        printf("%d\n", set->elements[i]);
+    }
+    
+}
+
+int main(){
     HashSet mySet;
     initHashSet(&mySet);
 
     addToHashSet(&mySet, 1);
     addToHashSet(&mySet, 2);
     addToHashSet(&mySet, 3);
+    addToHashSet(&mySet, 9);
+    addToHashSet(&mySet, 7);
+    addToHashSet(&mySet, 3);
+
+    count(&mySet);
 
     if (containsInHashSet(&mySet, 2)){
         printf("contains 2\n");
@@ -55,4 +67,6 @@ int main(void){
     else{
         printf("Doesnt contain 2\n");
     }
+
+    return 0;
 }
