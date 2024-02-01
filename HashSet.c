@@ -1,72 +1,78 @@
+/*A hashset in C */
+
 #include <stdio.h>
 #include <stdbool.h>
 
 #define MAX_SET_SIZE 100
 
-/*represents the set*/
-typedef struct{
-    int elements[MAX_SET_SIZE];
-    int size;
+
+/* The set */
+typedef struct {
+  int element[MAX_SET_SIZE];
+  int size;
 }HashSet;
 
-/*init a empty set*/
+/* Init a empty set */
 void initHashSet(HashSet* set){
-    set->size = 0;
+  set->size = 0;
 }
 
-bool addToHashSet(HashSet* set, int element){
-    /*checks if element is in set*/
-    for(int i=0; i < set->size; ++i){
-        if(set->elements[i] == element){
-            return false;   //element is in use
-        }
+bool addToHash(HashSet* set, int element){
+  /*check if element in set*/
+  for (size_t i=0; i < set->size; ++i) {
+    if (set->element[i] == element) {
+      return false;
     }
-    /*add element to set*/
-    if(set->size < MAX_SET_SIZE){
-        set->elements[set->size] = element;
-        set->size++;
-        return true; //element added flawlessly
-    }else{
-        return false;
-    }
+  }
+
+  /* add element to the set */
+  if (set->size < MAX_SET_SIZE) {
+    set->element[set->size++] = element;
+    return true;  // Element successfully added to the set
+  } else {
+    return false;  // Set is full, cannot add more elements
+  }
 }
 
-/*chech if element is already in set*/
-bool containsInHashSet(const HashSet* set, int element){
-    for (int i = 0; i < set->size; ++i){
-       if(set->elements[i] == element){
-        return true;
-       }
+
+// check if element in set 
+bool inSet(const HashSet* set, int element){
+  for (int i = 0; i < set->size; ++i){
+    if (set->element[i] == element)
+    {
+      return true;
     }
-    return false;
+  }
+
+  return false;
 }
 
 void count(HashSet* set) {
-    for (size_t i = 0; i < set->size; i++){
-        printf("%d\n", set->elements[i]);
-    }
-    
+  for (size_t i = 0; i < set->size; ++i)
+  {
+    printf("%d\n", set->element[i]);
+  }
 }
 
+
+
+
+
+
 int main(){
-    HashSet mySet;
-    initHashSet(&mySet);
+  HashSet my_set;
+  initHashSet(&my_set);
 
-    addToHashSet(&mySet, 1);
-    addToHashSet(&mySet, 2);
-    addToHashSet(&mySet, 3);
-    addToHashSet(&mySet, 9);
-    addToHashSet(&mySet, 7);
-    addToHashSet(&mySet, 3);
+  addToHash(&my_set, 1);
+  addToHash(&my_set, 2);
+  addToHash(&my_set, 3);
+  addToHash(&my_set, 4);
+  addToHash(&my_set, 5);
 
-    count(&mySet);
+  printf("\nElements Below: \n");
+  count(&my_set);
 
-    if (containsInHashSet(&mySet, 2)){
-        printf("contains 2\n");
-    }
-    else{
-        printf("Doesnt contain 2\n");
-    }
 
-    return 0;
+
+	return 0;
 }
